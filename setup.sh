@@ -3,14 +3,17 @@ path=$(dirname "$0")
 path=$(realpath "$path")
 
 # Install oh-my-zsh
-sh -c "$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+./ohs-install.sh
 # oh-my-zsh plugins
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 # move .oh-my-zsh to ~/dotfiles
-mv $HOME/.oh-my-zsh $HOME/dotfiles/.oh-my-zsh
+rm -rf $path/.oh-my-zsh
+mv $HOME/.oh-my-zsh $path
 # oh-my-zsh theme
 cp $path/yyt.zsh-theme $path/.oh-my-zsh/themes/yyt.zsh-theme
+# delete original .zshrc
+rm ~/.zshrc
 
 # create symbolic links
 ln -s $path/.vim $HOME/.vim
