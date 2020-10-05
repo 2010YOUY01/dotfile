@@ -1,6 +1,8 @@
 echo "Setup dotfiles"
-ln -s .vim $HOME/.vim
-ln -s .tmux.conf $HOME/.tmux.conf
-ln -s .oh-my-zsh $HOME/.oh-my-zsh
-ln -s .vimrc $HOME/.vimrc
-ln -s .zshrc $HOME/.zshrc
+path=$(dirname "$0")
+path=$(realpath "$path")
+ln -s $path/.vim $HOME/.vim
+ln -s $path/.tmux.conf $HOME/.tmux.conf
+ln -s $path/.oh-my-zsh $HOME/.oh-my-zsh
+ln -s $path/.vimrc $HOME/.vimrc
+ln -s $path/.zshrc $HOME/.zshrc
