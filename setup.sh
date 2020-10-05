@@ -15,6 +15,13 @@ cp $path/yyt.zsh-theme $path/.oh-my-zsh/themes/yyt.zsh-theme
 # delete original .zshrc
 rm ~/.zshrc
 
+# backup old setups
+mv $HOME/.vim $HOME/.vim-backup
+mv $HOME/.tmux.conf $HOME/.tmux.conf-backup
+mv $HOME/.oh-my-zsh $HOME/.oh-my-zsh-backup
+mv $HOME/.vimrc $HOME/.vimrc-backup
+mv $HOME/.zshrc $HOME/.zshrc-backup
+
 # create symbolic links
 ln -s $path/.vim $HOME/.vim
 ln -s $path/.tmux.conf $HOME/.tmux.conf
