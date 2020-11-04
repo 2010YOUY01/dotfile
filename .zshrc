@@ -70,7 +70,7 @@ ZSH_THEME="yyt"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions autojump zsh-syntax-highlighting)
+plugins=(git zsh-autosuggestions autojump zsh-syntax-highlighting zsh-vim-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -107,3 +107,9 @@ alias lc="leetcode"
 # Brew config
 export HOMEBREW_AUTO_UPDATE_SECS="86400"
 export HOMEBREW_NO_AUTO_UPDATE="1"
+
+# How long to wait additional char in sequence
+KEYTIMEOUT=1
+
+# 6.s081 setup
+PATH=$PATH:/usr/local/opt/riscv-gnu-toolchain/bin
