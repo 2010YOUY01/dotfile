@@ -12,10 +12,11 @@ mv $HOME/.zshrc $HOME/.zshrc-backup
 # Install oh-my-zsh
 ./oh-my-zsh-setup.sh
 # oh-my-zsh theme
-cp $path/yyt.zsh-theme $HOME/.oh-my-zsh/themes/yyt.zsh-theme
+ln -s $path/yyt.zsh-theme $HOME/.oh-my-zsh/themes/yyt.zsh-theme
+
+# Setup neovim, vim
+./vim-setup.sh
 
 # create symbolic links
-ln -s $path/.vim $HOME/.vim
 ln -s $path/.tmux.conf $HOME/.tmux.conf
-ln -s $path/.vimrc $HOME/.vimrc
 ln -s $path/.zshrc $HOME/.zshrc

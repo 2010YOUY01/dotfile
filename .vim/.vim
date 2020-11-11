@@ -1,1 +1,0 @@
-/Users/yongting/dotfiles/.vim

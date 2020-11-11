@@ -1,0 +1,10 @@
+{
+	"coc.preferences.extensionUpdateCheck": "weekly",
+	"list.previousKeymap": "<C-p>",
+	"list.nextKeymap": "<C-n>",
+	"coc.preferences.formatOnSaveFiletypes": [
+		"json",
+		"c"
+	],
+	"pairs.disableLanguages": []
+}
