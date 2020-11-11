@@ -19,4 +19,5 @@ ln -s $path/yyt.zsh-theme $HOME/.oh-my-zsh/themes/yyt.zsh-theme
 
 # create symbolic links
 ln -s $path/.tmux.conf $HOME/.tmux.conf
+rm $HOME/.zshrc
 ln -s $path/.zshrc $HOME/.zshrc
