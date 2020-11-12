@@ -48,6 +48,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 "Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter' " Find .git as fzf's search root
 
 " Auto completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
