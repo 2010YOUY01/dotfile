@@ -103,6 +103,14 @@ alias lc="leetcode"
 
 # fzf default setup
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# fzf include hidden .files
+export FZF_DEFAULT_COMMAND="find . -path '*/\.*' -type d -prune -o -type f -print -o -type l -print 2> /dev/null | sed s/^..//"
+# Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
+export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+if [ "$(uname 2> /dev/null)" = "Linux" ]; then
+    source $HOME/dotfiles/key-bindings.zsh
+    source $HOME/dotfiles/completion.zsh
+fi
  
 # Brew config
 export HOMEBREW_AUTO_UPDATE_SECS="86400"
@@ -114,6 +122,7 @@ KEYTIMEOUT=1
 # 6.s081 setup
 PATH=$PATH:/usr/local/opt/riscv-gnu-toolchain/bin
 PATH=$PATH:/usr/local/opt/llvm/bin
+PATH=$PATH:~/.local/bin
 
 # nnn cd on quit
 n ()
@@ -144,5 +153,8 @@ n ()
     fi
 }
 
-# fzf include hidden .files
-export FZF_DEFAULT_COMMAND="find . -path '*/\.*' -type d -prune -o -type f -print -o -type l -print 2> /dev/null | sed s/^..//"
+# init autojump
+if [ "$(uname 2> /dev/null)" = "Linux" ]; then
+    . /usr/share/autojump/autojump.sh
+fi
+
