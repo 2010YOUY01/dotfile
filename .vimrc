@@ -5,11 +5,12 @@ map Q :q<CR>
 map R :source ~/.vimrc<CR>
 let g:mapleader = " "
 
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+set exrc secure " Enable project-specific .vimrc
 set nocompatible
 set number relativenumber 
 set cursorline " Show a line under cursor
 set showcmd " Show command at bottom
-syntax on " Turn on syntax highlighting.
 set shortmess+=I " Disable the default Vim startup message.
 set wildmenu " Auto completion on command mode
 set autochdir " Always execute command in current director
@@ -25,7 +26,7 @@ set noerrorbells visualbell t_vb= " Disable error sounds
 set mouse+=a " Enable mouse
 " Change color scheme
 set background=light
-set t_Co=256
+"set t_Co=256
 " Cursor in insert mode: bar, normal mode: block
 let &t_SI.="\e[5 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
@@ -40,6 +41,7 @@ Plug 'psliwka/vim-smoothie'
 "Plug 'vim-airline/vim-airline'
 Plug 'itchyny/lightline.vim'
 Plug 'arzg/vim-colors-xcode'
+Plug 'ayu-theme/ayu-vim'
 
 " File navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -49,6 +51,9 @@ Plug 'junegunn/fzf.vim'
 
 " Auto completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'vim-syntastic/syntastic'
+"Plug 'rhysd/vim-clang-format'
 " Taglist
 "Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
 " Error checking
@@ -96,7 +101,7 @@ Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or 
 call plug#end()
 
 " coc config
-let g:coc_global_extensions = ['coc-pairs', 'coc-json', 'coc-vimlsp', 'coc-clangd']
+let g:coc_global_extensions = ['coc-pairs', 'coc-json', 'coc-vimlsp', 'coc-cmake']
 " having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=100
@@ -236,7 +241,17 @@ let g:lightline = {'colorscheme': 'ayu_light'}
 
 " Color scheme
 "colorscheme default
-colorscheme xcodelight
+colorscheme ayu
+set termguicolors     " enable true colors support
+colorscheme xcodelighthc
 
 " fzf config
 nnoremap <c-f> :Files<cr>
+
+" syntastic config
+let g:syntastic_cpp_checkers = ['cpplint']
+let g:syntastic_c_checkers = ['cpplint', 'gcc']
+let g:syntastic_cpp_cpplint_exec = 'cpplint'
+" The following two lines are optional. Configure it to your liking!
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0

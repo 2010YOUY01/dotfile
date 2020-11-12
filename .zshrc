@@ -52,7 +52,7 @@ ZSH_THEME="yyt"
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
 
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
@@ -70,7 +70,7 @@ ZSH_THEME="yyt"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions autojump zsh-syntax-highlighting zsh-vim-mode)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-vim-mode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -114,8 +114,6 @@ KEYTIMEOUT=1
 # 6.s081 setup
 PATH=$PATH:/usr/local/opt/riscv-gnu-toolchain/bin
 PATH=$PATH:/usr/local/opt/llvm/bin
-
-source /Users/yongting/.config/broot/launcher/bash/br
 
 # nnn cd on quit
 n ()
