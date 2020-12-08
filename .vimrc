@@ -22,16 +22,14 @@ set hidden
 set ignorecase smartcase " Search ignore cases
 set incsearch " Start search as you type
 set hlsearch " Highlight search items
+nnoremap <esc> :noh<return><esc> " Disable highlight after each search
 set noerrorbells visualbell t_vb= " Disable error sounds
 set mouse+=a " Enable mouse
-" Change color scheme
-set background=light
-"set t_Co=256
 " Cursor in insert mode: bar, normal mode: block
 let &t_SI.="\e[5 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
-
+set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
 
 " Vim-plug
 call plug#begin('~/.vim/plugged')
@@ -42,6 +40,10 @@ Plug 'psliwka/vim-smoothie'
 Plug 'itchyny/lightline.vim'
 Plug 'arzg/vim-colors-xcode'
 Plug 'ayu-theme/ayu-vim'
+Plug 'morhetz/gruvbox'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'jonathanfilip/vim-lucius'
+Plug 'chriskempson/base16-vim'
 
 " File navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -52,7 +54,7 @@ Plug 'airblade/vim-rooter' " Find .git as fzf's search root
 
 " Auto completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'vim-syntastic/syntastic'
 "Plug 'rhysd/vim-clang-format'
 " Taglist
@@ -99,6 +101,8 @@ Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or 
 "Plug 'kana/vim-textobj-user'
 "Plug 'fadein/vim-FIGlet'
 
+" Browser plugin
+Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 call plug#end()
 
 " coc config
@@ -218,22 +222,41 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+" Coc-vimlsp config
+let g:markdown_fenced_languages = [
+      \ 'vim',
+      \ 'help'
+      \]
 
 " NERDTree config
 map tt :NERDTreeToggle<CR>
 let NERDTreeMinimalUI = 1
 
 " lightline config
-let g:lightline = {'colorscheme': 'powerline'}
+let g:lightline = {'colorscheme': 'powerline', 'component_function': {'filename': 'FilenameForLightline'}}
+" Show full path of filename
+function! FilenameForLightline()
+    return expand('%')
+endfunction
 
 " Color scheme
-"colorscheme default
-"colorscheme ayu
+set background=dark
 set termguicolors     " enable true colors support
-colorscheme xcodelighthc
+set t_Co=256   " This is may or may not needed.
+let base16colorspace=256  " Access colors present in 256 colorspace
+"colorscheme base16-phd
+"colorscheme base16-phd
+"colorscheme base16-gruvbox-dark-hard
+let g:lucius_style='dark'
+let g:lucius_contrast='low'
+let g:lucius_contrast_bg='high'
+colorscheme lucius
+"colorscheme xcodelighthc
 
 " fzf config
-nnoremap <c-t> :Files<cr>
+nnoremap <c-f> :Files<cr>
+nnoremap <c-t> :Buffers<cr>
+nnoremap <c-s> :Rg<cr>
 
 " syntastic config
 let g:syntastic_cpp_checkers = ['cpplint']

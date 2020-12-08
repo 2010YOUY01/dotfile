@@ -1,39 +1,40 @@
 {
-    "coc.preferences.extensionUpdateCheck": "weekly",
-    "list.previousKeymap": "<C-p>",
-    "list.nextKeymap": "<C-n>",
-    "coc.preferences.formatOnSaveFiletypes": [
-        "json"
-    ],
-    "pairs.disableLanguages": [],
-    "languageserver": {
-        "ccls": {
-            "command": "ccls",
-            "filetypes": [
-                "c",
-                "cc",
-                "cpp",
-                "c++",
-                "objc",
-                "objcpp"
-            ],
-            "rootPatterns": [
-                ".ccls",
-                "compile_commands.json",
-                ".git/",
-                ".hg/"
-            ],
-            "initializationOptions": {
-                "cache": {
-                    "directory": "/tmp/ccls"
-                },
-                "index": {
-                    "onChange": true
-                },
-                "highlight": {
-                    "lsRanges": true
-                }
-            }
+  "coc.preferences.extensionUpdateCheck": "weekly",
+  "coc.preferences.hoverTarget": "float",
+  "list.previousKeymap": "<C-p>",
+  "list.nextKeymap": "<C-n>",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "json"
+  ],
+  "pairs.disableLanguages": [],
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": [
+        "c",
+        "cc",
+        "cpp",
+        "c++",
+        "objc",
+        "objcpp"
+      ],
+      "rootPatterns": [
+        ".ccls",
+        "compile_commands.json",
+        ".git/",
+        ".hg/"
+      ],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
+        },
+        "index": {
+          "onChange": true
+        },
+        "highlight": {
+          "lsRanges": true
         }
+      }
     }
+  }
 }
