@@ -1,11 +1,12 @@
-map <c-j> 5j
-map <c-k> 5k
-map S :w<CR> 
-map Q :q<CR> 
-map R :source ~/.vimrc<CR>
+nnoremap <c-j> J
+nmap J 5j
+nmap K 5k
+nmap S :w<CR> 
+nmap Q :q<CR> 
+nmap R :source ~/.vimrc<CR>
 let g:mapleader = " "
 
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
+set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
 set exrc secure " Enable project-specific .vimrc
 set nocompatible
 set number relativenumber 
@@ -14,7 +15,7 @@ set showcmd " Show command at bottom
 set shortmess+=I " Disable the default Vim startup message.
 set wildmenu " Auto completion on command mode
 set autochdir " Always execute command in current director
-set scrolloff=5 " Always display top and bottom 5 lines
+set scrolloff=10 " Always display top and bottom 5 lines
 set timeoutlen=300 ttimeoutlen=0 " Reduce delay
 set laststatus=2 " Always show the bottom statusline, even only 1 window open
 set backspace=indent,eol,start " Change default backspace function, to make it more intuitive
@@ -56,6 +57,8 @@ Plug 'airblade/vim-rooter' " Find .git as fzf's search root
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'vim-syntastic/syntastic'
+Plug 'preservim/nerdcommenter'
+Plug 'dense-analysis/ale'
 "Plug 'rhysd/vim-clang-format'
 " Taglist
 "Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
@@ -70,8 +73,8 @@ Plug 'vim-syntastic/syntastic'
 "Plug 'itchyny/vim-cursorword'
 " Git
 "Plug 'rhysd/conflict-marker.vim'
-"Plug 'tpope/vim-fugitive'
-"Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
 "Plug 'gisphm/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
 " HTML, CSS, JavaScript, PHP, JSON, etc.
 "Plug 'elzr/vim-json'
@@ -112,6 +115,14 @@ let g:coc_global_extensions = ['coc-pairs', 'coc-json', 'coc-vimlsp', 'coc-cmake
 set updatetime=100
 " don't pass messages to |ins-completion-menu|.
 set shortmess+=c
+
+"if has("patch-8.1.1564")
+  "" Recently vim can merge signcolumn and number column into one
+  "set signcolumn=number
+"else
+  "set signcolumn=yes
+"endif
+
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
@@ -233,7 +244,18 @@ map tt :NERDTreeToggle<CR>
 let NERDTreeMinimalUI = 1
 
 " lightline config
-let g:lightline = {'colorscheme': 'powerline', 'component_function': {'filename': 'FilenameForLightline'}}
+" let g:lightline = {'colorscheme': 'powerline', 'component_function': {'filename': 'FilenameForLightline', 'gitbranch': 'FugitiveHead'}}
+let g:lightline = {
+      \ 'colorscheme': 'powerline',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead',
+      \   'filename': 'FilenameForLightline'
+      \ },
+      \ }
 " Show full path of filename
 function! FilenameForLightline()
     return expand('%')
@@ -254,8 +276,8 @@ colorscheme lucius
 "colorscheme xcodelighthc
 
 " fzf config
-nnoremap <c-f> :Files<cr>
-nnoremap <c-t> :Buffers<cr>
+nnoremap <c-t> :Files<cr>
+nnoremap <c-f> :Buffers<cr>
 nnoremap <c-s> :Rg<cr>
 
 " syntastic config
@@ -265,3 +287,6 @@ let g:syntastic_cpp_cpplint_exec = 'cpplint'
 " The following two lines are optional. Configure it to your liking!
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
+
+" ale
+let g:ale_disable_lsp = 1 " Disable ale lsp, use coc's lsp instead
