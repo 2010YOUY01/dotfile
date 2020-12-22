@@ -1,4 +1,4 @@
-nnoremap <c-j> J
+" nnoremap <c-j> J
 nmap J 5j
 nmap K 5k
 nmap S :w<CR> 
@@ -45,6 +45,8 @@ Plug 'morhetz/gruvbox'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'jonathanfilip/vim-lucius'
 Plug 'chriskempson/base16-vim'
+Plug 'Yggdroot/indentLine'
+Plug 'luochen1990/rainbow'
 
 " File navigation
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -59,6 +61,7 @@ Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'vim-syntastic/syntastic'
 Plug 'preservim/nerdcommenter'
 Plug 'dense-analysis/ale'
+Plug 'honza/vim-snippets'
 "Plug 'rhysd/vim-clang-format'
 " Taglist
 "Plug 'majutsushi/tagbar', { 'on': 'TagbarOpenAutoClose' }
@@ -109,10 +112,10 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 call plug#end()
 
 " coc config
-let g:coc_global_extensions = ['coc-pairs', 'coc-json', 'coc-vimlsp', 'coc-cmake']
+let g:coc_global_extensions = ['coc-clangd', 'coc-pairs', 'coc-json', 'coc-vimlsp', 'coc-cmake', 'coc-highlight', 'coc-snippets']
 " having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=100
+set updatetime=10
 " don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
@@ -238,6 +241,12 @@ let g:markdown_fenced_languages = [
       \ 'vim',
       \ 'help'
       \]
+
+" Coc-snippets config
+
+""""""""""""""
+"Other config"
+""""""""""""""
 
 " NERDTree config
 map tt :NERDTreeToggle<CR>
