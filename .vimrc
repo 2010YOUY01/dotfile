@@ -112,7 +112,7 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 call plug#end()
 
 " coc config
-let g:coc_global_extensions = ['coc-clangd', 'coc-pairs', 'coc-json', 'coc-vimlsp', 'coc-cmake', 'coc-highlight', 'coc-snippets']
+let g:coc_global_extensions = ['coc-pairs', 'coc-json', 'coc-vimlsp', 'coc-cmake',  'coc-snippets']
 " having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=10
@@ -161,7 +161,7 @@ function! s:show_documentation()
   endif
 endfunction
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+"autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -299,3 +299,6 @@ let g:syntastic_cpp_cpplint_exec = 'cpplint'
 
 " ale
 let g:ale_disable_lsp = 1 " Disable ale lsp, use coc's lsp instead
+
+" vim-lsp-cxx-highlight
+let g:lsp_cxx_hl_use_text_props = 1
