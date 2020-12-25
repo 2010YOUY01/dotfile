@@ -4,6 +4,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export ASAN_OPTIONS=detect_container_overflow=0
+export HOMEBREW_CORE_GIT_REMOTE=https://mirrors.ustc.edu.cn/homebrew-core.git
+
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -160,3 +162,6 @@ if [ "$(uname 2> /dev/null)" = "Linux" ]; then
     . /usr/share/autojump/autojump.sh
 fi
 
+# autosuggestions keybindings
+bindkey -r "^F"
+bindkey "^F" forward-word

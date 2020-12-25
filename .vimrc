@@ -112,7 +112,7 @@ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 call plug#end()
 
 " coc config
-let g:coc_global_extensions = ['coc-pairs', 'coc-json', 'coc-vimlsp', 'coc-cmake',  'coc-snippets']
+let g:coc_global_extensions = ['coc-rust-analyzer', 'coc-pairs', 'coc-json', 'coc-vimlsp', 'coc-cmake',  'coc-snippets']
 " having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=10
@@ -258,11 +258,12 @@ let g:lightline = {
       \ 'colorscheme': 'powerline',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'cocstatus' ] ]
       \ },
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead',
-      \   'filename': 'FilenameForLightline'
+      \   'filename': 'FilenameForLightline',
+      \   'cocstatus': 'coc#status'
       \ },
       \ }
 " Show full path of filename

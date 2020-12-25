@@ -5,7 +5,8 @@
   "list.nextKeymap": "<C-n>",
   "diagnostic.displayByAle": true,
   "coc.preferences.formatOnSaveFiletypes": [
-    "json"
+    "json",
+    "rust"
   ],
   "pairs.disableLanguages": [],
   "languageserver": {
