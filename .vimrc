@@ -119,12 +119,12 @@ set updatetime=10
 " don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
-"if has("patch-8.1.1564")
-  "" Recently vim can merge signcolumn and number column into one
-  "set signcolumn=number
-"else
-  "set signcolumn=yes
-"endif
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 
 function! s:check_back_space() abort
   let col = col('.') - 1

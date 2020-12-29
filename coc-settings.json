@@ -3,7 +3,7 @@
   "coc.preferences.hoverTarget": "float",
   "list.previousKeymap": "<C-p>",
   "list.nextKeymap": "<C-n>",
-  "diagnostic.displayByAle": true,
+  "diagnostic.displayByAle": false,
   "coc.preferences.formatOnSaveFiletypes": [
     "json",
     "rust"
