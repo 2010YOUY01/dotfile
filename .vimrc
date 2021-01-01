@@ -277,12 +277,14 @@ set termguicolors     " enable true colors support
 set t_Co=256   " This is may or may not needed.
 let base16colorspace=256  " Access colors present in 256 colorspace
 "colorscheme base16-phd
-"colorscheme base16-phd
 "colorscheme base16-gruvbox-dark-hard
 let g:lucius_style='dark'
 let g:lucius_contrast='low'
 let g:lucius_contrast_bg='high'
 colorscheme lucius
+" Modify comment color
+hi Comment  guifg=#7d7d7d
+"colorscheme ayu
 "colorscheme xcodelighthc
 
 " fzf config
@@ -303,3 +305,8 @@ let g:ale_disable_lsp = 1 " Disable ale lsp, use coc's lsp instead
 
 " vim-lsp-cxx-highlight
 let g:lsp_cxx_hl_use_text_props = 1
+
+" Indentline color
+let g:indentLine_setColors = 0
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
