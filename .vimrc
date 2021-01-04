@@ -1,6 +1,6 @@
 " nnoremap <c-j> J
-nnoremap J 5j
-nnoremap K 5k
+noremap J 5j
+noremap K 5k
 nnoremap S :w<CR> 
 nnoremap Q :q<CR> 
 nnoremap R :source ~/.vimrc<CR>
