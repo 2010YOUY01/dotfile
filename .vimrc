@@ -283,7 +283,7 @@ let g:lucius_contrast='low'
 let g:lucius_contrast_bg='high'
 colorscheme lucius
 " Modify comment color
-hi Comment  guifg=#7d7d7d
+hi Comment  guifg=#808080
 "colorscheme ayu
 "colorscheme xcodelighthc
 
@@ -309,4 +309,3 @@ let g:lsp_cxx_hl_use_text_props = 1
 " Indentline color
 let g:indentLine_setColors = 0
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-
