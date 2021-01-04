@@ -1,9 +1,9 @@
 " nnoremap <c-j> J
-nmap J 5j
-nmap K 5k
-nmap S :w<CR> 
-nmap Q :q<CR> 
-nmap R :source ~/.vimrc<CR>
+nnoremap J 5j
+nnoremap K 5k
+nnoremap S :w<CR> 
+nnoremap Q :q<CR> 
+nnoremap R :source ~/.vimrc<CR>
 let g:mapleader = " "
 
 set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
@@ -57,7 +57,7 @@ Plug 'airblade/vim-rooter' " Find .git as fzf's search root
 
 " Auto completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'jackguo380/vim-lsp-cxx-highlight'
+" Plug 'jackguo380/vim-lsp-cxx-highlight'
 Plug 'vim-syntastic/syntastic'
 Plug 'preservim/nerdcommenter'
 Plug 'dense-analysis/ale'
@@ -283,9 +283,9 @@ let g:lucius_contrast='low'
 let g:lucius_contrast_bg='high'
 colorscheme lucius
 " Modify comment color
-hi Comment  guifg=#808080
+" hi Comment  guifg=#808080
 "colorscheme ayu
-"colorscheme xcodelighthc
+" colorscheme xcodelighthc
 
 " fzf config
 nnoremap <c-t> :Files<cr>
@@ -302,9 +302,6 @@ let g:syntastic_cpp_cpplint_exec = 'cpplint'
 
 " ale
 let g:ale_disable_lsp = 1 " Disable ale lsp, use coc's lsp instead
-
-" vim-lsp-cxx-highlight
-let g:lsp_cxx_hl_use_text_props = 1
 
 " Indentline color
 let g:indentLine_setColors = 0

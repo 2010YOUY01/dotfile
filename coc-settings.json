@@ -4,6 +4,7 @@
   "list.previousKeymap": "<C-p>",
   "list.nextKeymap": "<C-n>",
   "diagnostic.displayByAle": false,
+  "clangd.enabled": false,
   "coc.preferences.formatOnSaveFiletypes": [
     "json",
     "rust"
@@ -28,9 +29,6 @@
       "initializationOptions": {
         "cache": {
           "directory": "/tmp/ccls"
-        },
-        "highlight": {
-          "lsRanges": true
         }
       }
     }
