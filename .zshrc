@@ -104,6 +104,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias lc="leetcode"
 alias e="nvim"
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  alias say='echo "$1" | espeak 2>/dev/null'
+fi
 
 # fzf default setup
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
