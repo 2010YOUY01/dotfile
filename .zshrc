@@ -106,10 +106,10 @@ alias lc="leetcode"
 alias e="nvim"
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
   alias say='echo "$1" | espeak 2>/dev/null'
+  alias sayy='say "Task Done"'
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias sayy='say -v Mei-jia 任务完成'
 fi
-alias sayy='say "Task Done"'
 
 # fzf default setup
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
