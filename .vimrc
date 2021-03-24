@@ -1,3 +1,6 @@
+" ===
+" === Neovim setup
+" ===
 " nnoremap <c-j> J
 noremap J 5j
 noremap K 5k
@@ -6,7 +9,7 @@ nnoremap Q :q<CR>
 nnoremap R :source ~/.vimrc<CR>
 let g:mapleader = " "
 
-set tabstop=8 softtabstop=0 expandtab shiftwidth=2 smarttab
+set tabstop=8 softtabstop=0 expandtab shiftwidth=8 smarttab
 set exrc secure " Enable project-specific .vimrc
 set nocompatible
 set number relativenumber 
@@ -31,8 +34,15 @@ let &t_SI.="\e[5 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
+" Code collapse
+set foldmethod=syntax
+set foldcolumn=1     " the number of columns to use for folding display at the left
+set foldnestmax=1 " At most fold 1 level
+nnoremap t zA
 
-" Vim-plug
+" ===
+" === Vim-plug
+" ===
 call plug#begin('~/.vim/plugged')
 
 " GUI enhancements
@@ -49,7 +59,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'luochen1990/rainbow'
 
 " File navigation
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+"Plug 'scrooloose/nerdtred', { 'on': 'NERDTreeToggle' }
 "Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -106,13 +116,19 @@ Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or 
 "Plug 'MarcWeber/vim-addon-mw-utils'
 "Plug 'kana/vim-textobj-user'
 "Plug 'fadein/vim-FIGlet'
-
 " Browser plugin
 Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+" Golang
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
 call plug#end()
 
-" coc config
-let g:coc_global_extensions = ['coc-rust-analyzer', 'coc-pairs', 'coc-json', 'coc-vimlsp', 'coc-cmake',  'coc-snippets']
+
+
+" ===
+" === coc.nvim
+" ===
+let g:coc_global_extensions = ['coc-highlight', 'coc-rust-analyzer', 'coc-pairs', 'coc-json', 'coc-vimlsp', 'coc-cmake',  'coc-snippets']
 " having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=10
@@ -161,7 +177,7 @@ function! s:show_documentation()
   endif
 endfunction
 " Highlight the symbol and its references when holding the cursor.
-"autocmd CursorHold * silent call CocActionAsync('highlight')
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
@@ -229,12 +245,15 @@ nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
 nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
+"" Do default action for next item.
+"nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+"" Do default action for previous item.
+"nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+"" Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+nmap <silent> <Leader>j <Plug>(coc-diagnostic-next-error)
+nmap <silent> <Leader>k <Plug>(coc-diagnostic-prev-error)
 
 " Coc-vimlsp config
 let g:markdown_fenced_languages = [
@@ -242,17 +261,20 @@ let g:markdown_fenced_languages = [
       \ 'help'
       \]
 
-" Coc-snippets config
 
-""""""""""""""
-"Other config"
-""""""""""""""
 
-" NERDTree config
-map tt :NERDTreeToggle<CR>
-let NERDTreeMinimalUI = 1
+" ===
+" === NERDTree config
+" ===
+"map tt :NERDTreeToggle<CR>
+"let NERDTreeMinimalUI = 1
+"let NERDTreeChDirMode=2 " Solve the conflict with fzf.vim
 
-" lightline config
+
+
+" ===
+" === lightline
+" ===
 " let g:lightline = {'colorscheme': 'powerline', 'component_function': {'filename': 'FilenameForLightline', 'gitbranch': 'FugitiveHead'}}
 let g:lightline = {
       \ 'colorscheme': 'powerline',
@@ -271,28 +293,43 @@ function! FilenameForLightline()
     return expand('%')
 endfunction
 
-" Color scheme
-set background=dark
+
+
+" ===
+" === Theme (use :hi to config)
+" ===
+set background=light
 set termguicolors     " enable true colors support
 set t_Co=256   " This is may or may not needed.
 let base16colorspace=256  " Access colors present in 256 colorspace
 "colorscheme base16-phd
 "colorscheme base16-gruvbox-dark-hard
+
+"lucius theme config
 let g:lucius_style='dark'
 let g:lucius_contrast='low'
 let g:lucius_contrast_bg='high'
-colorscheme lucius
-" Modify comment color
-" hi Comment  guifg=#808080
-"colorscheme ayu
-" colorscheme xcodelighthc
+"colorscheme lucius
+hi Comment  guifg=#808080
 
-" fzf config
+"xcode theme config
+colorscheme xcodelighthc
+hi MatchParen guifg=black guibg=#80bfff
+hi CursorColumn guibg=#cce4ff
+
+
+" ===
+" === fzf.vim
+" ===
 nnoremap <c-t> :Files<cr>
 nnoremap <c-f> :Buffers<cr>
 nnoremap <c-s> :Rg<cr>
 
-" syntastic config
+
+
+" ===
+" === Syntastic
+" ===
 let g:syntastic_cpp_checkers = ['cpplint']
 let g:syntastic_c_checkers = ['cpplint', 'gcc']
 let g:syntastic_cpp_cpplint_exec = 'cpplint'
@@ -300,9 +337,36 @@ let g:syntastic_cpp_cpplint_exec = 'cpplint'
 "let g:syntastic_check_on_open = 1
 "let g:syntastic_check_on_wq = 0
 
-" ale
+
+
+" ===
+" === ale
+" ===
 let g:ale_disable_lsp = 1 " Disable ale lsp, use coc's lsp instead
 
-" Indentline color
+
+
+" ===
+" === Indentline
+" ===
 let g:indentLine_setColors = 0
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+
+
+" ===
+" === Golang
+" ===
+autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+" Dsisable 'K' to show the GoDoc
+let g:go_doc_keywordprg_enabled = 0
+" When format on save, vim won't auto-fold code blocks
+let g:go_fmt_experimental = 1
+" Disable diagnostics to avoid conflicting coc-go
+let g:go_diagnostics_enabled = 0
+let g:go_code_completion_enabled = 0
+let g:go_fmt_autosave = 0
+let g:go_imports_autosave = 0
+" Disable ctrl-t to go back
+let g:go_def_mapping_enabled = 0
+set list lcs=tab:\|\ " Replace tab with space in auto-formating, to enable IndentLine 
