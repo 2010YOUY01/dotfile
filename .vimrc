@@ -9,7 +9,7 @@ nnoremap Q :q<CR>
 nnoremap R :source ~/.vimrc<CR>
 let g:mapleader = " "
 
-set tabstop=8 softtabstop=0 expandtab shiftwidth=8 smarttab
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 set exrc secure " Enable project-specific .vimrc
 set nocompatible
 set number relativenumber 
@@ -18,6 +18,7 @@ set showcmd " Show command at bottom
 set shortmess+=I " Disable the default Vim startup message.
 set wildmenu " Auto completion on command mode
 set autochdir " Always execute command in current director
+" Automatically set current directory to browsing directory.                                                      
 set scrolloff=10 " Always display top and bottom 5 lines
 set timeoutlen=300 ttimeoutlen=0 " Reduce delay
 set laststatus=2 " Always show the bottom statusline, even only 1 window open
@@ -36,9 +37,13 @@ let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
 " Code collapse
 set foldmethod=syntax
+set nofoldenable  " Default unfold
 set foldcolumn=1     " the number of columns to use for folding display at the left
-set foldnestmax=1 " At most fold 1 level
+set foldnestmax=2 " At most fold 1 level
+set foldopen+=jump
+set foldopen+=search
 nnoremap t zA
+nnoremap T za
 
 " ===
 " === Vim-plug
@@ -59,7 +64,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'luochen1990/rainbow'
 
 " File navigation
-"Plug 'scrooloose/nerdtred', { 'on': 'NERDTreeToggle' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 "Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -266,9 +271,9 @@ let g:markdown_fenced_languages = [
 " ===
 " === NERDTree config
 " ===
-"map tt :NERDTreeToggle<CR>
-"let NERDTreeMinimalUI = 1
-"let NERDTreeChDirMode=2 " Solve the conflict with fzf.vim
+"map nt :NERDTreeToggle<CR>
+let NERDTreeMinimalUI = 1
+let NERDTreeChDirMode=2 " Solve the conflict with fzf.vim
 
 
 
@@ -277,7 +282,7 @@ let g:markdown_fenced_languages = [
 " ===
 " let g:lightline = {'colorscheme': 'powerline', 'component_function': {'filename': 'FilenameForLightline', 'gitbranch': 'FugitiveHead'}}
 let g:lightline = {
-      \ 'colorscheme': 'powerline',
+      \ 'colorscheme': 'PaperColor',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'cocstatus' ] ]
@@ -298,24 +303,29 @@ endfunction
 " ===
 " === Theme (use :hi to config)
 " ===
-set background=light
 set termguicolors     " enable true colors support
 set t_Co=256   " This is may or may not needed.
 let base16colorspace=256  " Access colors present in 256 colorspace
 "colorscheme base16-phd
 "colorscheme base16-gruvbox-dark-hard
 
+
+" Papercolor theme config
+set background=light
+colorscheme PaperColor
+hi CursorColumn guibg=#cce4ff
+hi Conceal guibg=#cce4ff
 "lucius theme config
 let g:lucius_style='dark'
 let g:lucius_contrast='low'
 let g:lucius_contrast_bg='high'
-"colorscheme lucius
+colorscheme lucius
 hi Comment  guifg=#808080
-
 "xcode theme config
-colorscheme xcodelighthc
+colorscheme xcodelight
 hi MatchParen guifg=black guibg=#80bfff
 hi CursorColumn guibg=#cce4ff
+
 
 
 " ===
@@ -351,7 +361,7 @@ let g:ale_disable_lsp = 1 " Disable ale lsp, use coc's lsp instead
 " ===
 let g:indentLine_setColors = 0
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-
+let g:indentLine_enabled = 0 " Disable by default
 
 
 " ===
