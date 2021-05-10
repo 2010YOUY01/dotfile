@@ -9,6 +9,7 @@ nnoremap Q :q<CR>
 nnoremap R :source ~/.vimrc<CR>
 let g:mapleader = " "
 
+set guifont=Monaco:h11
 set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 set exrc secure " Enable project-specific .vimrc
 set nocompatible
