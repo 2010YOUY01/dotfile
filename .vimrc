@@ -10,7 +10,7 @@ nnoremap R :source ~/.vimrc<CR>
 let g:mapleader = " "
 
 set guifont=Monaco:h11
-set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
+set tabstop=2 softtabstop=0 expandtab shiftwidth=2 smarttab
 set exrc secure " Enable project-specific .vimrc
 set nocompatible
 set number relativenumber 
@@ -36,7 +36,11 @@ let &t_SI.="\e[5 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
 let &t_EI.="\e[1 q" "EI = NORMAL mode (ELSE)
 set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20
+
 " Code collapse
+" zM to close all
+" zR to open all
+" t, T to local toggle
 set foldmethod=syntax
 set nofoldenable  " Default unfold
 set foldcolumn=1     " the number of columns to use for folding display at the left
