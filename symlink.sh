@@ -6,6 +6,7 @@ mkdir $HOME/.config
 mkdir $HOME/.config/nvim
 # oh-my-zsh theme
 ln -s $path/yyt.zsh-theme $HOME/.oh-my-zsh/themes/yyt.zsh-theme
+ln -s $path/yyt.zsh-theme $HOME/.oh-my-zsh/lib/key-bindings.zsh
 ln -s $path/.tmux.conf $HOME/.tmux.conf
 ln -s $path/.zshrc $HOME/.zshrc
 # Editor
