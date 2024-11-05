@@ -1,55 +1,68 @@
 {
-        "coc.preferences.extensionUpdateCheck": "weekly",
-        "coc.preferences.hoverTarget": "float",
-        "coc.preferences.colorSupport": true,
-        "highlight.colors.enable": true,
-        "highlight.colorNames.enable": true,
-        "list.previousKeymap": "<C-p>",
-        "list.nextKeymap": "<C-n>",
-        "diagnostic.displayByAle": false,
-        "clangd.enabled": false,
-        "coc.preferences.formatOnSaveFiletypes": [
-                "json",
-                "rust",
-                "go"
-        ],
-        "pairs.disableLanguages": [],
-        "languageserver": {
-                "ccls": {
-                        "command": "ccls",
-                        "filetypes": [
-                                "c",
-                                "cpp",
-                                "objc",
-                                "objcpp"
-                        ],
-                        "rootPatterns": [
-                                ".ccls",
-                                "compile_commands.json",
-                                ".vim/",
-                                ".git/",
-                                ".hg/"
-                        ],
-                        "initializationOptions": {
-                                "cache": {
-                                        "directory": "/tmp/ccls"
-                                }
-                        }
-                },
-                "golang": {
-                        "command": "gopls",
-                        "rootPatterns": [
-                                "go.mod",
-                                ".vim/",
-                                ".git/",
-                                ".hg/"
-                        ],
-                        "filetypes": [
-                                "go"
-                        ],
-                        "initializationOptions": {
-                                "usePlaceholders": true
-                        }
-                }
+  "coc.preferences.extensionUpdateCheck": "weekly",
+  "coc.preferences.hoverTarget": "float",
+  "coc.preferences.colorSupport": true,
+  "highlight.colors.enable": true,
+  "highlight.colorNames.enable": true,
+  "list.previousKeymap": "<C-p>",
+  "list.nextKeymap": "<C-n>",
+  "diagnostic.displayByAle": false,
+  "clangd.enabled": false,
+  "java.format.enabled": true,
+  "coc.preferences.formatOnSaveFiletypes": ["rust", "cpp, java"],
+  "cmake.formatter": "cmake-format",
+  "pairs.disableLanguages": [],
+  "languageserver": {
+    "ccls": {
+      "command": "ccls",
+      "filetypes": [
+        "c",
+        "cpp",
+        "objc",
+        "objcpp"
+      ],
+      "rootPatterns": [
+        ".ccls",
+        "compile_commands.json",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "initializationOptions": {
+        "cache": {
+          "directory": "/tmp/ccls"
         }
+      }
+    },
+    "cmake": {
+      "command": "cmake-language-server",
+      "filetypes": [
+        "cmake"
+      ],
+      "rootPatterns": [
+        "build/"
+      ],
+      "initializationOptions": {
+        "buildDirectory": "build"
+      }
+    },
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": [
+        "go.mod",
+        ".vim/",
+        ".git/",
+        ".hg/"
+      ],
+      "filetypes": [
+        "go"
+      ],
+      "initializationOptions": {
+        "usePlaceholders": true
+      }
+    }
+  },
+  "rust-analyzer.diagnostics.disabled": [
+    "unresolved-proc-macro"
+  ]
 }

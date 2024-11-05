@@ -1,10 +1,16 @@
+source ~/zsh-snap/znap.zsh
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Path setup
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 export ASAN_OPTIONS=detect_container_overflow=0
 export HOMEBREW_CORE_GIT_REMOTE=https://mirrors.ustc.edu.cn/homebrew-core.git
+export OPENSSL_ROOT_DIR=/usr/local/opt/openssl
+export EDITOR=nvim # For git interactive rebase
 
 
 # Set name of the theme to load --- if set to "random", it will
@@ -112,6 +118,15 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias sayy='say -v Mei-jia "任务完成"'
 fi
 
+# GPT related
+alias tslt="sgpt --role tslt"
+alias txtemoji="sgpt --role txtemoji"
+alias toemoji="sgpt --role toemoji"
+alias gptldr="sgpt --role tldr"
+
+# By default, let curl do `-L` for auto redirection, `-O` for naming the local file the same as remote one
+alias download="curl -LO"
+
 # fzf default setup
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # fzf include hidden .files
@@ -134,6 +149,8 @@ KEYTIMEOUT=1
 PATH=$PATH:/usr/local/opt/riscv-gnu-toolchain/bin
 PATH=$PATH:/usr/local/opt/llvm/bin
 PATH=$PATH:~/.local/bin
+# 6.824
+PATH="$PATH:$HOME/bin"
 
 # nnn cd on quit
 n ()
@@ -172,3 +189,49 @@ fi
 # autosuggestions keybindings
 bindkey -r "^F"
 bindkey "^F" forward-word
+
+# zsh-autocomplete
+# znap source marlonrichert/zsh-autocomplete
+
+# >>> xmake >>>
+[[ -s "$HOME/.xmake/profile" ]] && source "$HOME/.xmake/profile" # load xmake profile
+# <<< xmake <<<
+export JAVA_HOME=$(/usr/libexec/java_home -v 17.0.2)
+
+source $HOME/.cargo/env
+
+# environment variables for grpc
+export MY_INSTALL_DIR=$HOME/.local
+export PATH="$MY_INSTALL_DIR/bin:$PATH"
+
+# rust specific environment variables
+export RUSTFLAGS="-C link-arg=-fuse-ld=lld"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/Users/yongting/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/Users/yongting/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/Users/yongting/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/Users/yongting/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# proxy
+export http_proxy=http://127.0.0.1:1087
+export https_proxy=http://127.0.0.1:1087
+export ALL_PROXY=socks5://127.0.0.1:1080
+
+# postgis
+export LIBRARY_PATH=/usr/local/Cellar/protobuf-c/1.5.0_3/lib:$LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/local/Cellar/protobuf-c/1.5.0_3/lib:$LD_LIBRARY_PATH
+export DYLD_LIBRARY_PATH=/usr/local/Cellar/protobuf-c/1.5.0_3/lib:$DYLD_LIBRARY_PATH
+export PATH="/usr/local/opt/llvm/bin:$PATH"
+
+# sccache
+export RUSTC_WRAPPER=sccache

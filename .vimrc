@@ -31,6 +31,7 @@ set hlsearch " Highlight search items
 nnoremap <esc> :noh<return><esc> " Disable highlight after each search
 set noerrorbells visualbell t_vb= " Disable error sounds
 set mouse+=a " Enable mouse
+set exrc " Enable local(project-specific) .vimrc overwrite
 " Cursor in insert mode: bar, normal mode: block
 let &t_SI.="\e[5 q" "SI = INSERT mode
 let &t_SR.="\e[4 q" "SR = REPLACE mode
@@ -74,10 +75,20 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter' " Find .git as fzf's search root
+" For vsnip users.
+"Plug 'hrsh7th/cmp-vsnip'
+"Plug 'hrsh7th/vim-vsnip'
 
 " Auto completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'jackguo380/vim-lsp-cxx-highlight'
+"Plug 'neovim/nvim-lspconfig'
+"Plug 'hrsh7th/cmp-nvim-lsp'
+"Plug 'hrsh7th/cmp-buffer'
+"Plug 'hrsh7th/cmp-path'
+"Plug 'hrsh7th/cmp-cmdline'
+"Plug 'hrsh7th/nvim-cmp'
+
 Plug 'vim-syntastic/syntastic'
 Plug 'preservim/nerdcommenter'
 Plug 'dense-analysis/ale'
@@ -97,7 +108,7 @@ Plug 'honza/vim-snippets'
 " Git
 "Plug 'rhysd/conflict-marker.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-signify'
+"Plug 'mhinz/vim-signify'
 "Plug 'gisphm/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
 " HTML, CSS, JavaScript, PHP, JSON, etc.
 "Plug 'elzr/vim-json'
@@ -127,18 +138,19 @@ Plug 'gcmt/wildfire.vim' " in Visual mode, type i' to select all text in '', or 
 "Plug 'kana/vim-textobj-user'
 "Plug 'fadein/vim-FIGlet'
 " Browser plugin
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
+" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 " Golang
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" TLA+
 
 call plug#end()
 
 
-
 " ===
-" === coc.nvim
+" === nvim-lspconfig
 " ===
-let g:coc_global_extensions = ['coc-highlight', 'coc-rust-analyzer', 'coc-pairs', 'coc-json', 'coc-vimlsp', 'coc-cmake',  'coc-snippets']
+  "python.jediEnabled": false,
+let g:coc_global_extensions = ['coc-pyright', 'coc-highlight', 'coc-rust-analyzer', 'coc-go', 'coc-pairs', 'coc-json', 'coc-vimlsp', 'coc-cmake',  'coc-snippets', 'coc-ccls', 'coc-java', 'coc-markdownlint']
 " having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
 set updatetime=10
@@ -272,7 +284,6 @@ let g:markdown_fenced_languages = [
       \]
 
 
-
 " ===
 " === NERDTree config
 " ===
@@ -340,6 +351,11 @@ nnoremap <c-t> :Files<cr>
 nnoremap <c-f> :Buffers<cr>
 nnoremap <c-s> :Rg<cr>
 
+" ===
+" === vim rooter
+" ===
+let g:rooter_patterns = ['.git']
+
 
 
 " ===
@@ -366,22 +382,39 @@ let g:ale_disable_lsp = 1 " Disable ale lsp, use coc's lsp instead
 " ===
 let g:indentLine_setColors = 0
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-let g:indentLine_enabled = 0 " Disable by default
+let g:indentLine_enabled = 1 " Disable by default
 
 
 " ===
 " === Golang
 " ===
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+"autocmd BufWritePre *.java :CocCommand editor.action.formatDocument
 " Dsisable 'K' to show the GoDoc
 let g:go_doc_keywordprg_enabled = 0
 " When format on save, vim won't auto-fold code blocks
 let g:go_fmt_experimental = 1
 " Disable diagnostics to avoid conflicting coc-go
 let g:go_diagnostics_enabled = 0
-let g:go_code_completion_enabled = 0
+let g:go_code_completion_enabled = 1
 let g:go_fmt_autosave = 0
 let g:go_imports_autosave = 0
 " Disable ctrl-t to go back
-let g:go_def_mapping_enabled = 0
+let g:_def_mapping_enabled = 0
 set list lcs=tab:\|\ " Replace tab with space in auto-formating, to enable IndentLine 
+
+"lua require('plugins')
+
+" ===
+" === Change inside `_`
+" ===
+function! ChangeInsideWord()
+    setlocal iskeyword-=_ " Set _ as word boundary
+    execute 'normal! ciw'
+    setlocal iskeyword+=_ " Unset _ as word boundary
+    execute 'normal! l'
+    startinsert
+endfunction
+
+command! -nargs=0 CIU call ChangeInsideWord()
+nnoremap <leader>ciw :CIU<CR>
